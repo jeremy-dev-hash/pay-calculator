@@ -1,11 +1,17 @@
-def calculate_pay(rate, hours, tax_rate):
-    if hours > 80:
-        regular_pay = 80 * rate
-        overtime_hours = hours - 80
-        overtime_pay = (rate * 1.5) * overtime_hours
-        gross_pay = regular_pay + overtime_pay
-    else:
-        gross_pay = hours * rate
+def calculate_pay(rate, hours_1, hours_2, tax_rate):
+    gross_pay = (hours_1 + hours_2) * rate
+
+    if hours_1 > 40:
+        overtime_hours_1 = hours_1 - 40
+        overtime_pay_1 = (rate * .5) * overtime_hours_1
+        gross_pay += overtime_pay_1
+
+    if hours_2 > 40:
+        overtime_hours_2 = hours_2 -  40
+        overtime_pay_2 = (rate * .5) * overtime_hours_2
+        gross_pay += overtime_pay_2
+
+
     tax = gross_pay * (tax_rate / 100)
     net_pay = gross_pay - tax
 
@@ -14,8 +20,9 @@ def calculate_pay(rate, hours, tax_rate):
 
 
 rate = float(input("Enter hourly rate:"))
-hours = float(input("Enter hours worked:"))
+hours_1 = float(input("Enter hours worked in week one:"))
+hours_2 = float(input("Enter hours worked in week two:"))
 tax_rate = float(input("Enter tax rate:"))
 
-result = calculate_pay(rate, hours, tax_rate)
-print(result)
+result = calculate_pay(rate, hours_1, hours_2, tax_rate)
+print(f"Your take home pay is {result}!")
